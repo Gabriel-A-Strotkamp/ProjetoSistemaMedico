@@ -7,7 +7,6 @@ package Testes;
 import br.edu.ifsul.cc.lpoo.projetoSistemaMedico.dao.PersistenciaJPA;
 import Modelos.*;
 import org.junit.*;
-import static org.junit.Assert.*;
 
 public class TestePersistencia {
 
@@ -31,7 +30,7 @@ public class TestePersistencia {
     //
     @Test
     public void testePersistencia() {
-        /*
+        
         Medicamentos m = new Medicamentos(1);
         m.setDescricao("Paracetamol");
         m.setLaboratorio("EMS");
@@ -41,14 +40,14 @@ public class TestePersistencia {
         med.setNome("Dr. Carlos");
         med.setFormacao("Clinico Geral");
 
-        Pacientes p = new Pacientes(1, "Lucas", 25);
+        Pacientes p = new Pacientes( "Lucas", 25);
         p.setDoenca("Dor de cabeça");
 
         med.addPaciente(p);
 
         //(int id, Medicos medico, Pacientes paciente)
         Receituarios r = new Receituarios(1, med, p);
-        r.setDescricao("Tomar 1cp cod: 1  (de 6h em 6h)");
+        r.setPrescricao("Tomar 1cp cod: 1  (de 6h em 6h)");
         r.addMedicamento(m);
 
         try {
@@ -61,7 +60,7 @@ public class TestePersistencia {
 
         } catch (Exception e) {
             System.err.println("Erro ao persistir modelo: " + m);
-        }*/
+        }
 
     }
 }

@@ -16,7 +16,7 @@ public class PersistenciaJPA implements InterfaceBD {
     public PersistenciaJPA() {
         //parametro: é o nome da unidade de persistencia (Persistence Unit)
         factory
-                = Persistence.createEntityManagerFactory("pu_lpoo_ClinicaMedica");
+                = Persistence.createEntityManagerFactory("ProjetoSistemaMedico");
         //conecta no bd e executa a estratégia de geração.
         entity = factory.createEntityManager();
     }

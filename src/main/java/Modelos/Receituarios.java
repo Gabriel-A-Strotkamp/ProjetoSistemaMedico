@@ -20,15 +20,18 @@ public class Receituarios implements Serializable {
     @Column(nullable = false, length = 200)
     private String prescricao;
     
-    @Enumerated(EnumType.STRING)
+    @OneToOne
+    @JoinColumn(name = "medico_id", nullable = true)
     private Medicos medico;
     
-    @Enumerated(EnumType.STRING)
+    @OneToOne
+    @JoinColumn(name = "paciente_id", nullable = true)
     private Pacientes paciente;
     
-    @OneToMany(mappedBy = "Medicamentos")
+    @OneToMany(mappedBy = "descricao", cascade = CascadeType.ALL, orphanRemoval = true)    
     private final List<Medicamentos> medicamentos;
 
+    
     public Receituarios() {
         this.medicamentos = new ArrayList<>();
     }
@@ -40,6 +43,7 @@ public class Receituarios implements Serializable {
         this.medicamentos = new ArrayList<>();
     }
 
+    
     public int getId() {
         return id;
     }
@@ -80,6 +84,24 @@ public class Receituarios implements Serializable {
         medicamentos.remove(medicamento);    
         }
     public Medicamentos getMedicamentos(){
-        return (Medicamentos) this.medicamentos;
+        return (Medicamentos) medicamentos;
     }
+    
+    public String verMedicamentos(){
+        String txt = "";
+        for(Medicamentos m: medicamentos){
+            txt+= m.getDescricao()+", ";
+        }
+        return txt;
+    }
+    
+    
+
+    @Override
+    public String toString() {
+        String txt = "teste"; //verMedicamentos();
+        return "Receita{ medico:" + medico.getNome() + " |paciente: " + paciente.getNome() + 
+                " |prescricao: " + prescricao + " |Medicamentos: [ " + txt +"]}";
+    }
+    
 }

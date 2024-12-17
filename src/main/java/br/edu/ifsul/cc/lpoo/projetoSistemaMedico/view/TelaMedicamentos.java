@@ -35,6 +35,7 @@ public class TelaMedicamentos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnVoltar = new javax.swing.JButton();
         lblTitulo = new javax.swing.JLabel();
         lblBuscaDescricao = new javax.swing.JLabel();
         txtBuscaDescricao = new javax.swing.JTextField();
@@ -43,6 +44,9 @@ public class TelaMedicamentos extends javax.swing.JFrame {
         btnRemoverMedicamento = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         lstMedicamentos = new javax.swing.JList<>();
+        btnVoltar1 = new javax.swing.JButton();
+
+        btnVoltar.setText("Voltar");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +101,13 @@ public class TelaMedicamentos extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(lstMedicamentos);
 
+        btnVoltar1.setText("Voltar");
+        btnVoltar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,14 +125,19 @@ public class TelaMedicamentos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnNovoMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEditarMedicamento, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(btnRemoverMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnRemoverMedicamento, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                .addGap(8, 8, 8)))))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(164, 164, 164)
+                .addComponent(btnVoltar1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,14 +148,16 @@ public class TelaMedicamentos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscaDescricao)
                     .addComponent(txtBuscaDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNovoMedicamento)
                     .addComponent(btnEditarMedicamento)
-                    .addComponent(btnRemoverMedicamento)
-                    .addComponent(btnNovoMedicamento))
-                .addGap(16, 16, 16))
+                    .addComponent(btnRemoverMedicamento))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnVoltar1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,6 +235,11 @@ public class TelaMedicamentos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lstMedicamentosAncestorAdded
 
+    private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnVoltar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -266,6 +289,8 @@ public class TelaMedicamentos extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarMedicamento;
     private javax.swing.JButton btnNovoMedicamento;
     private javax.swing.JButton btnRemoverMedicamento;
+    private javax.swing.JButton btnVoltar;
+    private javax.swing.JButton btnVoltar1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblBuscaDescricao;
     private javax.swing.JLabel lblTitulo;

@@ -40,7 +40,7 @@ public class TelaReceituarios extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         lstMedicos = new javax.swing.JList<>();
         btnCriarReceita = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnVerReceituarios = new javax.swing.JButton();
         lblinstrucao = new javax.swing.JLabel();
         lblBuscaPaciente = new javax.swing.JLabel();
         txtBuscaPaciente = new javax.swing.JTextField();
@@ -51,6 +51,7 @@ public class TelaReceituarios extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         lstMedico = new javax.swing.JList<>();
         lblTitulo1 = new javax.swing.JLabel();
+        btnVoltar = new javax.swing.JButton();
 
         lblBuscaNome.setText("Nome: ");
 
@@ -88,10 +89,10 @@ public class TelaReceituarios extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("LIsta de Receitas");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVerReceituarios.setText("LIsta de Receitas");
+        btnVerReceituarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVerReceituariosActionPerformed(evt);
             }
         });
 
@@ -157,6 +158,13 @@ public class TelaReceituarios extends javax.swing.JFrame {
         lblTitulo1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblTitulo1.setText("Receituários Médicos");
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,11 +179,13 @@ public class TelaReceituarios extends javax.swing.JFrame {
                             .addComponent(txtBuscaPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(41, 41, 41)
-                        .addComponent(btnCriarReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addComponent(btnCriarReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnVoltar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnVerReceituarios, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,8 +226,12 @@ public class TelaReceituarios extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCriarReceita, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVerReceituarios, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addContainerGap())
         );
 
         pack();
@@ -241,9 +255,13 @@ public class TelaReceituarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCriarReceitaActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnVerReceituariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerReceituariosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        TelaVisualizarReceita telaReceitas
+        = new TelaVisualizarReceita(this, rootPaneCheckingEnabled);
+        telaReceitas.setVisible(true);
+        
+    }//GEN-LAST:event_btnVerReceituariosActionPerformed
 
     private void txtBuscaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscaPacienteActionPerformed
         // TODO add your handling code here:
@@ -296,13 +314,13 @@ public class TelaReceituarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscaMedicoKeyPressed
 
     private void txtBuscaMedicoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscaMedicoKeyReleased
-        if(txtBuscaNome.getText().trim().isEmpty()){
+        if(txtBuscaMedico.getText().trim().isEmpty()){
             carregarMedicosCadastrados();
         } else{
             jpa.conexaoAberta();
             DefaultListModel modeloLista = new DefaultListModel();
-            modeloLista.addAll(jpa.getMedicos(txtBuscaNome.getText().trim()));
-            System.out.println("Medicos carregados: "+jpa.getMedicos(txtBuscaNome.getText().trim()));
+            modeloLista.addAll(jpa.getMedicos(txtBuscaMedico.getText().trim()));
+            System.out.println("Medicos carregados: "+jpa.getMedicos(txtBuscaMedico.getText().trim()));
             lstMedicos.setModel(modeloLista);
 
             jpa.fecharConexao();
@@ -312,6 +330,11 @@ public class TelaReceituarios extends javax.swing.JFrame {
     private void lstMedicoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lstMedicoAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_lstMedicoAncestorAdded
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -363,9 +386,9 @@ public class TelaReceituarios extends javax.swing.JFrame {
     public void carregarMedicosCadastrados(){
         jpa.conexaoAberta();
         
-        DefaultListModel modeloLista = new DefaultListModel();
-        modeloLista.addAll(jpa.getMedicos());
-        lstMedicos.setModel(modeloLista);
+        DefaultListModel modeloLista1 = new DefaultListModel();
+        modeloLista1.addAll(jpa.getMedicos());
+        lstMedico.setModel(modeloLista1);
         
         jpa.fecharConexao();
         
@@ -374,7 +397,8 @@ public class TelaReceituarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCriarReceita;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnVerReceituarios;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;

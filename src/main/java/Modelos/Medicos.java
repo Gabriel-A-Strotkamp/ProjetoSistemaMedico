@@ -29,7 +29,9 @@ public class Medicos implements Serializable {
     @Column(length = 20)
     private String formacao;
     
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)    private final List<Pacientes> pacientes;
+    @OneToMany(mappedBy = "nome", cascade = CascadeType.ALL)   
+    private final List<Pacientes> pacientes;
+    
     public Medicos() {
         this.pacientes = new ArrayList<>();
     }
@@ -91,4 +93,10 @@ public class Medicos implements Serializable {
     public Pacientes getpacientes(){
         return (Pacientes) this.pacientes;
     }
+
+    @Override
+    public String toString() {
+        return  "nome:" + nome + ", formacao: " + formacao;
+    }
+    
 }

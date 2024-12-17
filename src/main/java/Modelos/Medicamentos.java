@@ -23,17 +23,23 @@ public class Medicamentos implements Serializable {
     
     @Column(length = 20)
     private String laboratorio;
+    
+    @ManyToOne
+    @JoinColumn(name = "tb_Receituarios")
+    private final Receituarios receita;
 
     public Medicamentos(int id) {
         this.id = id; 
+        receita = null;
     }
     public Medicamentos(){
-        
+        receita = null;
     }
     public Medicamentos(int id, String descricao, String laboratorio) {
         this.id = id;
         this.descricao = descricao;
         this.laboratorio = laboratorio;
+        receita = null;
     }
     
     public int getId() {
@@ -54,6 +60,11 @@ public class Medicamentos implements Serializable {
 
     public void setLaboratorio(String laboratorio) {
         this.laboratorio = laboratorio;
+    }
+
+    @Override
+    public String toString() {
+        return "descricao:" + descricao + ", laboratorio: " + laboratorio;
     }
     
     

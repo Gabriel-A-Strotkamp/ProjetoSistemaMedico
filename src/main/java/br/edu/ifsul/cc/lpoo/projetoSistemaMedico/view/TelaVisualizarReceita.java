@@ -21,8 +21,6 @@ public class TelaVisualizarReceita extends javax.swing.JDialog {
     
     PersistenciaJPA jpa;
     Receituarios receita;
-    Medicos medico = new Medicos();
-    Pacientes paciente = new Pacientes();
         
     /**
      * Creates new form TelaVisualizarReceita
@@ -32,28 +30,9 @@ public class TelaVisualizarReceita extends javax.swing.JDialog {
         initComponents();
         
         jpa = new PersistenciaJPA();
+        carregarReceitasCadastrados();
     }
     
-    public void setReceita(Pacientes paciente, Medicos medico) {
-        
-        this.paciente = paciente;
-        this.medico = medico;
-        
-        if ((receita.getMedico().equals(medico))&&(receita.getPaciente().equals(paciente))){
-            txtNomePaciente.setText(paciente.getNome());
-            txtNomeMedico.setText(medico.getNome());
-            txtPrescricao.setText (receita.getPrescricao());
-            
-            DefaultListModel modeloLista = new DefaultListModel();
-            modeloLista.addAll((Collection) receita.getMedicamentos());
-            lstMedicamentos.setModel(modeloLista);
-      
-        }
-        
-
-        
-        
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,79 +44,14 @@ public class TelaVisualizarReceita extends javax.swing.JDialog {
     private void initComponents() {
 
         lblTitulo = new javax.swing.JLabel();
-        lblNomePaciente = new javax.swing.JLabel();
-        txtNomePaciente = new javax.swing.JTextField();
-        lblNomeMedico = new javax.swing.JLabel();
-        txtNomeMedico = new javax.swing.JTextField();
-        lblBuscaMedicamento = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        lstMedicamentos = new javax.swing.JList<>();
-        lblPrescricao = new javax.swing.JLabel();
-        txtPrescricao = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstReceitas = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        lblTitulo.setText("Receita Médica");
-
-        lblNomePaciente.setText("Paciente:");
-        lblNomePaciente.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                lblNomePacienteAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
-        txtNomePaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomePacienteActionPerformed(evt);
-            }
-        });
-
-        lblNomeMedico.setText("Medico:");
-        lblNomeMedico.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                lblNomeMedicoAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
-        txtNomeMedico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNomeMedicoActionPerformed(evt);
-            }
-        });
-
-        lblBuscaMedicamento.setText("Medicamento:");
-        lblBuscaMedicamento.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                lblBuscaMedicamentoAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-
-        lstMedicamentos.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                lstMedicamentosAncestorAdded(evt);
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-        });
-        jScrollPane3.setViewportView(lstMedicamentos);
-
-        lblPrescricao.setText("Prescrição:");
+        lblTitulo.setText("Receitas Médicas");
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +60,8 @@ public class TelaVisualizarReceita extends javax.swing.JDialog {
             }
         });
 
+        jScrollPane1.setViewportView(lstReceitas);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -153,88 +69,35 @@ public class TelaVisualizarReceita extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNomeMedico)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNomePaciente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblBuscaMedicamento)
-                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblPrescricao))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPrescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(361, 361, 361)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(362, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(lblTitulo)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomePaciente)
-                    .addComponent(txtNomePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNomeMedico)
-                    .addComponent(txtNomeMedico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBuscaMedicamento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPrescricao)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPrescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnVoltar)
-                .addGap(18, 18, 18))
+                .addGap(12, 12, 12))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lblNomePacienteAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblNomePacienteAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblNomePacienteAncestorAdded
-
-    private void txtNomePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomePacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomePacienteActionPerformed
-
-    private void lblNomeMedicoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblNomeMedicoAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblNomeMedicoAncestorAdded
-
-    private void txtNomeMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeMedicoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNomeMedicoActionPerformed
-
-    private void lblBuscaMedicamentoAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lblBuscaMedicamentoAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblBuscaMedicamentoAncestorAdded
-
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
 
         dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
-
-    private void lstMedicamentosAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_lstMedicamentosAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lstMedicamentosAncestorAdded
 
     /**
      * @param args the command line arguments
@@ -277,18 +140,23 @@ public class TelaVisualizarReceita extends javax.swing.JDialog {
             }
         });
     }
+    
+    public void carregarReceitasCadastrados(){
+        jpa.conexaoAberta();
+        
+        DefaultListModel modeloLista = new DefaultListModel();
+        modeloLista.addAll(jpa.getReceituarios());
+        lstReceitas.setModel(modeloLista);
+        
+        jpa.fecharConexao();
+        
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblBuscaMedicamento;
-    private javax.swing.JLabel lblNomeMedico;
-    private javax.swing.JLabel lblNomePaciente;
-    private javax.swing.JLabel lblPrescricao;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JList<Medicamentos> lstMedicamentos;
-    private javax.swing.JTextField txtNomeMedico;
-    private javax.swing.JTextField txtNomePaciente;
-    private javax.swing.JTextField txtPrescricao;
+    private javax.swing.JList<Receituarios> lstReceitas;
     // End of variables declaration//GEN-END:variables
 }

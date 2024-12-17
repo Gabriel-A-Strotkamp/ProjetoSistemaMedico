@@ -29,13 +29,20 @@ public class Pacientes implements Serializable {
     
     @Column ()
     private int idade;
+    
+    @ManyToOne
+    @JoinColumn(name = "tb_medicos")
+    private final Medicos medico;
 
     public Pacientes() {
+        medico = null;
     }
 
     public Pacientes( String nome, int idade) {
         this.nome = nome;
         this.idade = idade;
+        medico = null;
+
     }
 
     public String getCpf() {
@@ -76,6 +83,11 @@ public class Pacientes implements Serializable {
 
     public void setIdade(int idade) {
         this.idade = idade;
+    }
+
+    @Override
+    public String toString() {
+        return"nome: " + nome + ", doenca: " + doenca;
     }
 
     

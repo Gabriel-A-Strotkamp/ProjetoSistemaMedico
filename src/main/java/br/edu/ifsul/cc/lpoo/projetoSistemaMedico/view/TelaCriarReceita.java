@@ -18,7 +18,7 @@ import javax.swing.*;
 public class TelaCriarReceita extends javax.swing.JDialog {
 
         PersistenciaJPA jpa;
-        Receituarios receita;
+        Receituarios receita = new Receituarios();
         Medicos medico = new Medicos();
         Pacientes paciente = new Pacientes();
     /**
@@ -256,9 +256,10 @@ public class TelaCriarReceita extends javax.swing.JDialog {
         receita.setPrescricao(txtPrescricao.getText());
         
 
-        medico.addPaciente(paciente);
+        //medico.addPaciente(paciente);
         
         jpa.conexaoAberta();
+        
         try {
             jpa.persist(receita);
             System.out.println("Medico cadastrada com sucesso");
@@ -267,6 +268,7 @@ public class TelaCriarReceita extends javax.swing.JDialog {
             System.out.println("Erro ao persistir Receitas: "+receita+" \n Erro: "+ex);
         }
         jpa.fecharConexao();
+        
         dispose();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
